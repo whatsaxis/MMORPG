@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+
+    <script defer type="module" src="/src/main.ts"></script>
+    <script defer type="module" src="/src/events/EventHandlers.ts"></script>
+  </head>
+  <body>
+    <noscript id="noscript">You need <span id="js">JS</span> enabled to run this app!</noscript>
+    <div id="stats">
+      <h2>Stats</h2>
+      <span id="stats-health" class="stat">Health: ? ❤️</span>
+      <span id="stats-defence" class="stat">Defence: ? 🛡️</span>
+      
+      <h2>Armour</h2>
+      <div id="armour"></div>
+
+      <h2>Inventory</h2>
+      <div id="inventory"></div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <div id="chat"></div>
+  </body>
+</html>
