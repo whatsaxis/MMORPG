@@ -4,6 +4,7 @@ import EnvironmentManager from '../../EnvironmentManager'
 import { EventType } from '../Events'
 import { Point, EntityType, MovementDirection } from '../../types'
 
+import { DIMENSIONS, SPEED } from '../../canvas'
 import { isColliding } from '../../collisions'
 
 
@@ -22,20 +23,20 @@ EventManager.listen(EventType.ENTITY_MOVEMENT, (e) => {
         scale: { ...entity.scale }
     }
 
-    if (direction === MovementDirection.NORTH) playerVector.position.y -= 10
-    if (direction === MovementDirection.SOUTH) playerVector.position.y += 10
-    if (direction === MovementDirection.EAST) playerVector.position.x += 10
-    if (direction === MovementDirection.WEST) playerVector.position.x -= 10
+    if (direction === MovementDirection.NORTH) playerVector.position.y -= SPEED
+    if (direction === MovementDirection.SOUTH) playerVector.position.y += SPEED
+    if (direction === MovementDirection.EAST) playerVector.position.x += SPEED
+    if (direction === MovementDirection.WEST) playerVector.position.x -= SPEED
 
     // Out of bounds!
 
     const s = playerVector.scale
 
     if (
-        playerVector.position.y === 0 - 10          ||
-        playerVector.position.y + s.y === 700 + 10  ||
-        playerVector.position.x === 0 - 10          ||
-        playerVector.position.x + s.x === 700 + 10
+        playerVector.position.y === 0 - SPEED          ||
+        playerVector.position.y + s.y === DIMENSIONS + SPEED  ||
+        playerVector.position.x === 0 - SPEED          ||
+        playerVector.position.x + s.x === DIMENSIONS + SPEED
     ) return e.prevent()
 
     /*

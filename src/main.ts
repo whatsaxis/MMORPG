@@ -1,6 +1,7 @@
 // ? => https://gamedev.stackexchange.com/questions/182955/my-html-canvas-keep-flickering
 
 import EnvironmentManager from './EnvironmentManager'
+import CELL, { resize } from './canvas'
 
 import Player from './entities/Player'
 import NPC from './entities/NPC'
@@ -11,7 +12,6 @@ import Chat from './Chat'
 import { Grid2D, MessageType } from './types'
 
 import loadAssets from './AssetManager'
-import { resize } from './canvas'
 
 import './normalize.css'
 import './style.css'
@@ -31,20 +31,21 @@ let playerPos: Grid2D = { x: 9999, y: 9999 }
 // Map loading
 
 const map = 
-`--------------
---------w-----
----w----------
-----ww--w---w-
---w-----w-----
------wwww-----
---------------
---------------
---------------
----------wwwww
----------w---w
-----p------n-w
----------w---w
----------wwwww
+`---------------
+---------w-----
+----w----------
+-----ww--w---w-
+---w-----w-----
+------wwww-----
+---------------
+---------------
+---------------
+----------wwwww
+----------w---w
+-----p------n-w
+----------w---w
+----------wwwww
+---------------
 `
 
 let y = 0
@@ -55,7 +56,7 @@ for (const row of map.split('\n')) {
     for (const block of [...row]) {
         x++
 
-        const pos = { x: (x - 1) * 50, y: y * 50 }
+        const pos = { x: (x - 1) * CELL, y: y * CELL }
 
         if (block === '-' || block === 'p' || block === 'n') {
             new Tile({ position: pos })

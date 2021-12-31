@@ -1,5 +1,6 @@
 import EnvironmentManager from './EnvironmentManager'
 import { Grid2D, SpriteImage, EntityOptions } from './types'
+import CELL from './canvas'
 
 
 abstract class Entity {
@@ -11,7 +12,7 @@ abstract class Entity {
         this.position = options.position
 
         if (options.scale) this.scale = options.scale
-        else this.scale = { x: 50, y: 50 }
+        else this.scale = { x: CELL, y: CELL }
 
         if (options.sprite && options.sprite?.src) this.sprite = options.sprite
 
