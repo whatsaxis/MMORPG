@@ -22,7 +22,9 @@ type ArmourSlot = Armour | null
 class Player extends Entity {
     level: number
     health: number
+    max_health: number
     defence: number
+    coins: number
 
     inventory: [IS, IS, IS, IS, IS, IS, IS, IS]
     armour: [ArmourSlot, ArmourSlot, ArmourSlot, ArmourSlot]
@@ -38,7 +40,9 @@ class Player extends Entity {
 
         this.level = 1
         this.health = 100
+        this.max_health = 100
         this.defence = 100
+        this.coins = 100
 
         let stardust_armour: [Armour, Armour, Armour, Armour] = [ item('HELMET_STARDUST'), item('CHESTPLATE_STARDUST'), item('LEGGINGS_STARDUST'), item('BOOTS_STARDUST')]
         stardust_armour.forEach(p => p.stats.upgrade = 5)
@@ -96,6 +100,7 @@ class Player extends Entity {
 
     $update() {
         this.health = 100
+        this.max_health = 100
         this.defence = 100
 
         /*
@@ -112,6 +117,7 @@ class Player extends Entity {
                 1 + (upgrade * 0.1)
 
             this.health += health * multiplier
+            this.max_health += health * multiplier
             this.defence += defence * multiplier
         }
         
@@ -121,12 +127,14 @@ class Player extends Entity {
 
         const health_ui = document.querySelector('#stats-health')
         const defence_ui = document.querySelector('#stats-defence')
+        const coins_ui = document.querySelector('#stats-coins')
 
-        if (!health_ui || !defence_ui) return
-        if (!health_ui.textContent || !defence_ui.textContent) return
+        if (!health_ui || !defence_ui || !coins_ui) return
+        if (!health_ui.textContent || !defence_ui.textContent || !coins_ui) return
 
-        health_ui.textContent = `Health: ${ this.health.toString()}❤️`
+        health_ui.textContent = `Health: ${ this.health.toString()}/${ this.max_health.toString() }❤️`
         defence_ui.textContent = `Defence: ${ this.defence.toString()}🛡️`
+        coins_ui.textContent = `Coins: ${ this.coins.toString() } 💰`
 
         /*
         * Update inventory & armour
@@ -169,6 +177,8 @@ class Player extends Entity {
                     if (armourSlot === true) {
                         const nextEmpty = this.inventory.indexOf(null)
 
+                        if (nextEmpty === -1) return
+
                         this.inventory[nextEmpty] = this.armour[p]
                         this.armour[p] = null
                     } else {
@@ -180,7 +190,10 @@ class Player extends Entity {
                 })
             }
 
-            i.textContent = item.name + '✪'.repeat(item.stats.upgrade)
+            i.textContent = item.name
+
+            if (item.type !== ItemType.MATERIAL) i.textContent += '✪'.repeat(item.stats.upgrade)
+
             slot.append( i )
 
             return slot

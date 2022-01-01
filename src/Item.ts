@@ -1,4 +1,4 @@
-import { Weapon, Armour, Tool, ItemRarity, ItemType, ArmourType } from './types'
+import { Weapon, Armour, Tool, ItemRarity, ItemType, ArmourType, Material } from './types'
 
 /* Item Names */
 
@@ -19,7 +19,14 @@ enum ToolNames {
     STONE_PICKAXE = 'STONE_PICKAXE'
 }
 
-type ItemNames = keyof typeof WeaponNames | keyof typeof ArmourNames | keyof typeof ToolNames
+enum MaterialNames {
+    COAL = 'COAL'
+}
+
+type ItemNames = keyof typeof WeaponNames  |
+                 keyof typeof ArmourNames  |
+                 keyof typeof ToolNames    |
+                 keyof typeof MaterialNames
 
 /* Item statistics */
 
@@ -29,6 +36,7 @@ const WEAPONS: { [ITEM_ID in WeaponNames]: Weapon } = {
         description: 'A simple sword!',
         rarity: ItemRarity.COMMON,
         type: ItemType.WEAPON,
+        value: 15,
         image: null,
         stats: {
             upgrade: 0,
@@ -43,6 +51,7 @@ const ARMOUR: { [ITEM_ID in ArmourNames]: Armour } = {
         description: 'A simple helmet!',
         rarity: ItemRarity.COMMON,
         type: ItemType.ARMOUR,
+        value: 25,
         image: null,
         stats: {
             upgrade: 0,
@@ -57,6 +66,7 @@ const ARMOUR: { [ITEM_ID in ArmourNames]: Armour } = {
         description: 'Mythic helmet, forged from the intense heat in the core of a star.',
         rarity: ItemRarity.MYTHIC,
         type: ItemType.ARMOUR,
+        value: 700,
         image: null,
         stats: {
             upgrade: 0,
@@ -70,6 +80,7 @@ const ARMOUR: { [ITEM_ID in ArmourNames]: Armour } = {
         description: 'A mythic chestplate, forged from the intense heat in the core of a star.',
         rarity: ItemRarity.MYTHIC,
         type: ItemType.ARMOUR,
+        value: 1250,
         image: null,
         stats: {
             upgrade: 0,
@@ -83,12 +94,13 @@ const ARMOUR: { [ITEM_ID in ArmourNames]: Armour } = {
         description: 'Mythic leggings, forged from the intense heat in the core of a star.',
         rarity: ItemRarity.MYTHIC,
         type: ItemType.ARMOUR,
+        value: 950,
         image: null,
         stats: {
             upgrade: 0,
             part: ArmourType.LEGGINGS,
             health: 650,
-            defence: 475
+            defence: 500
         }
     },
     BOOTS_STARDUST: {
@@ -96,6 +108,7 @@ const ARMOUR: { [ITEM_ID in ArmourNames]: Armour } = {
         description: 'Mythic boots, forged from the intense heat in the core of a star.',
         rarity: ItemRarity.MYTHIC,
         type: ItemType.ARMOUR,
+        value: 550,
         image: null,
         stats: {
             upgrade: 0,
@@ -112,6 +125,7 @@ const TOOLS: { [ITEM_ID in ToolNames]: Tool } = {
         description: 'Literally a pickaxe made out of stone..',
         rarity: ItemRarity.COMMON,
         type: ItemType.TOOL,
+        value: 10,
         image: null,
         stats: {
             upgrade: 0,
@@ -120,8 +134,19 @@ const TOOLS: { [ITEM_ID in ToolNames]: Tool } = {
     }
 }
 
+const MATERIALS: { [ITEM_ID in MaterialNames]: Material } = {
+    COAL: {
+        name: 'Coal',
+        description: 'A blob of coal',
+        type: ItemType.MATERIAL,
+        rarity: ItemRarity.COMMON,
+        value: 4,
+        image: null
+    }
+}
+
 /* Union type of all items */
-export const Items = { ...ARMOUR, ...WEAPONS, ...TOOLS }
+export const Items = { ...ARMOUR, ...WEAPONS, ...TOOLS, ...MATERIALS }
 
 /*
 * Item creation method
@@ -130,6 +155,7 @@ export const Items = { ...ARMOUR, ...WEAPONS, ...TOOLS }
 function item(i: keyof typeof WeaponNames): Weapon
 function item(i: keyof typeof ArmourNames): Armour
 function item(i: keyof typeof ToolNames): Tool
+function item(i: keyof typeof MaterialNames): Material
 
 function item(i: ItemNames) {
     /* Make a copy of one of the base items */

@@ -48,6 +48,7 @@ interface BaseItemOptions {
     description: string,
     type: ItemType,
     rarity: ItemRarity,
+    value: number,
     image: string | null
 }
 
@@ -69,9 +70,10 @@ export enum ItemRarity {
 }
 
 export enum ItemType {
-    WEAPON  = 'WEAPON',
-    ARMOUR  = 'ARMOUR',
-    TOOL    = 'TOOL'
+    WEAPON   = 'WEAPON',
+    ARMOUR   = 'ARMOUR',
+    TOOL     = 'TOOL',
+    MATERIAL = 'MATERIAL'
 }
 
 export enum ArmourType {
@@ -82,7 +84,7 @@ export enum ArmourType {
 }
 
 export type ItemUpgradeLevel = 0 | 1 | 2 | 3 | 4 | 5
-export type Item = Weapon | Armour | Tool
+export type Item = Weapon | Armour | Tool | Material
 
 /* Extended Item Interfaces */
 
@@ -109,7 +111,24 @@ export interface Tool extends BaseConsumableOptions {
     }
 }
 
-export type Material = BaseItemOptions
+export interface Material extends BaseItemOptions {
+    type: ItemType.MATERIAL
+}
+
+/*
+* Economy
+*/
+
+export interface Transaction {
+    amount: number,
+    type: '+' | '-'
+}
+
+export enum TransactionStatus {
+    SUCCESS            = 'SUCCESS',
+    NOT_ENOUGH_COINS   = 'NOT_ENOUGH_COINS',
+    NO_INVENTORY_SPACE = 'NO_INVENTORY_SPACE'
+}
 
 /*
 * Chat
