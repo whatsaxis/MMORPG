@@ -190,9 +190,20 @@ class Player extends Entity {
                 })
             }
 
-            i.textContent = item.name
+            
 
-            if (item.type !== ItemType.MATERIAL) i.textContent += '✪'.repeat(item.stats.upgrade)
+            if (item.type === ItemType.MATERIAL) {
+
+                const img = document.createElement('img')
+
+                img.src = '../../assets/' + item.image as string
+                img.setAttribute('style', 'height: 45px; width: 45px;')
+
+                i.append( img )
+            } else {
+                i.textContent = item.name
+                i.textContent += '✪'.repeat(item.stats.upgrade)
+            }
 
             slot.append( i )
 

@@ -7,7 +7,7 @@
 
 export let assets: { [path: string]: HTMLImageElement } = { }
 
-const LOADED_ASSETS = ['floor.png', 'wall.png', 'warrior.gif', 'npc.png']
+const LOADED_ASSETS = ['floor.png', 'wall.png', 'warrior.gif', 'npc.png', 'coal.jpeg','crystal.png']
 
 /*
 * Wait for all assets to load

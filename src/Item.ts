@@ -20,7 +20,8 @@ enum ToolNames {
 }
 
 enum MaterialNames {
-    COAL = 'COAL'
+    COAL    = 'COAL',
+    CRYSTAL = 'CRYSTAL'
 }
 
 type ItemNames = keyof typeof WeaponNames  |
@@ -140,8 +141,16 @@ const MATERIALS: { [ITEM_ID in MaterialNames]: Material } = {
         description: 'A blob of coal',
         type: ItemType.MATERIAL,
         rarity: ItemRarity.COMMON,
+        image: 'coal.jpeg',
         value: 4,
-        image: null
+    },
+    CRYSTAL: {
+        name: 'Crystal',
+        description: 'A big shiny crystal. Likely millions of years old.',
+        type: ItemType.MATERIAL,
+        rarity: ItemRarity.COMMON,
+        image: 'crystal.png',
+        value: 20,
     }
 }
 

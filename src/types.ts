@@ -131,6 +131,15 @@ export enum TransactionStatus {
 }
 
 /*
+* Resources
+*/
+
+export enum ResourceType {
+    COAL    = 'COAL',
+    CRYSTAL = 'CRYSTAL'
+}
+
+/*
 * Chat
 */
 
